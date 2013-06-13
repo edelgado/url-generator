@@ -9,20 +9,49 @@
 	<body>
 	  <div class="row">
 	    <div class="span12">
-    		<h1>Landing page URL Generator</h1>
     		<form>
     		<fieldset>
     		<legend>URL Generator</legend>
-    		<label for="baseUrl">Base URL</label> <input id="baseUrl" type="text" name="baseURL" placeholder="http://www.digium.com/en/landing/page">
+    		<label for="baseUrl">Base URL</label>
+    		<input id="baseUrl" type="text" name="baseURL" class="input-xlarge" placeholder="http://www.digium.com/en/landing/page">
     		<span class="help-block">E.g. http://www.digium.com/en/landing/my-landing-page</span>
     		<legend>Parameters</legend>
-				<label>Key <input type="text" placeholder="fullName"></label>  <label>Value <input type="text" placeholder="John Appleseed"></label> <input type="button" class="btn" value="Remove">
-    		<input type="button" class="btn" value="Add More">
-    		<input type="button" class="btn" value="Generate URL">
-  			<pre>http://www.digium.com/en/landing/test?fullName=John%20Appleseed</pre>
+    		
+    		<div class="controls controls-row">
+      		<input class="span3" type="text" placeholder="key">
+      		<input class="span4" type="text" placeholder="value">
+      		<a class="btn span1" href=""><i class="icon-remove"></i></a>
+    		</div>
+    		<p><a class="btn span2" href=""><i class="icon-plus"></i> Add</a></p>
+    		<p><a class="btn btn-primary" href="#results" data-toggle="modal"><i class="icon-cog icon-white"></i> Generate URL</a></p>
 	    </div>
     </div>
+    <div id="results" class="modal hide fade">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3>Bam!</h3>
+      </div>
+      <div class="modal-body">
+        <pre id="generated-URL">http://www.digium.com/en/landing/test?fullName=John%20Appleseed</pre>
+      </div>
+      <div class="modal-footer">
+        <a href="#" class="btn" data-dismiss="modal">Close</a>
+        <a href="#" class="btn btn-primary" id="copy_URL" data-clipboard-target="generated-URL">Copy URL</a>
+      </div>
+    </div>
 		<script src="js/jquery-1.10.1.min.js"></script>
+		<script src="js/ZeroClipboard.min.js"></script>
 		<script src="js/bootstrap.min.js"></script>
+		<script type="text/javascript">
+		  // Popover after copying
+		  $("#copy_URL").popover({trigger: 'manual', placement: 'top', content: 'Copied!'});
+		  // Allow copying generated URL
+			ZeroClipboard.setDefaults( { moviePath: 'other/ZeroClipboard.swf' } );
+      var clip = new ZeroClipboard($("#copy_URL"));
+      clip.on('complete', function(client, args) {
+        // Trigger popover
+        $("#copy_URL").popover('show');
+      });
+		</script>
 	</body>
 </html>
