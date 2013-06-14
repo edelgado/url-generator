@@ -7,48 +7,70 @@
     <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
   </head>
   <body>
-    <a href="https://github.com/edelgado/url-generator"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"></a>
-    <div class="row">
-      <div class="span12">
-        <h2>Generic URL Builder </h2>
-        <form class="form-inline">
-          <fieldset>
-            <legend>Base URL</legend>
-            <input id="baseUrl" type="text" name="baseURL" class="input-xlarge" placeholder="http://www.digium.com/en/landing/page">
-<!--             <span class="help-block">E.g. http://www.digium.com/en/landing/my-landing-page</span> -->
-            <legend>Parameters</legend>
-            <div class="controls controls-row">
-              <input class="span3" type="text" placeholder="key">
-              <input class="span4" type="text" placeholder="value">
-              <a class="btn span1" href=""><i class="icon-remove"></i></a>
+    <div class="container">
+      <a href="https://github.com/edelgado/url-generator"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"></a>
+      <div class="row">
+        <div class="span12">
+          <h2>Generic URL Builder </h2>
+          <p>Handy tool similar to Google's <a href="https://support.google.com/analytics/answer/1033867?hl=en&topic=1032998" target="_blank">URL Builder</a>, but general-purpose.</p>
+          <form class="form-inline">
+            <fieldset>
+              <legend>Website URL</legend>
+              <input id="baseUrl" type="url" name="baseURL" class="input-xlarge" placeholder="http://www.example.com/page.html">
+              <legend>Query String Parameters</legend>
+              <div class="controls controls-row">
+                <input class="span3" type="text" placeholder="key">
+                <input class="span4" type="text" placeholder="value">
+                <a class="span1 btn" href="#"><i class="icon-remove"></i></a>
+              </div>
+            </fieldset>
+          </form>
+        </div>
+      </div>
+      <div class="row">
+        <div class="span12">
+          <p><a class="btn" href=""><i class="icon-plus"></i> Add</a></p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="span12">
+          <p><a class="btn btn-primary" href="#results" data-toggle="modal"><i class="icon-wrench icon-white"></i> Build URL</a></p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="span12">
+          <p class="text-center"><small><i class="icon-info-sign"></i> by <a href="http://edelgado.github.io">Enrique Delgado</a> &ndash; <a href="#terms-of-use" data-toggle="modal">Terms of Use</a></small></p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="span12">
+          <div id="results" class="modal hide fade">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+              <h3>Bam!</h3>
             </div>
-          </fieldset>
-        </form>
-      </div>
-    </div>
-    <div class="row">
-      <div class="span12">
-        <p><a class="btn" href=""><i class="icon-plus"></i> Add</a></p>
-      </div>
-    </div>
-    <div class="row">
-      <div class="span12">
-        <p><a class="btn btn-primary" href="#results" data-toggle="modal"><i class="icon-cog icon-white"></i> Generate URL</a></p>
-      </div>
-    </div>
-    <div class="row">
-      <div class="span12">
-        <div id="results" class="modal hide fade">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h3>Bam!</h3>
+            <div class="modal-body">
+              <pre id="generated-URL">http://www.digium.com/en/landing/test?fullName=John%20Appleseed</pre>
+            </div>
+            <div class="modal-footer">
+              <a href="#" class="btn" data-dismiss="modal">Close</a>
+              <a href="#" class="btn btn-primary" id="copy_URL" data-clipboard-target="generated-URL">Copy URL</a>
+            </div>
           </div>
-          <div class="modal-body">
-            <pre id="generated-URL">http://www.digium.com/en/landing/test?fullName=John%20Appleseed</pre>
-          </div>
-          <div class="modal-footer">
-            <a href="#" class="btn" data-dismiss="modal">Close</a>
-            <a href="#" class="btn btn-primary" id="copy_URL" data-clipboard-target="generated-URL">Copy URL</a>
+          <div id="terms-of-use" class="modal hide fade">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+              <b>MIT License</b>
+            </div>
+            <div class="modal-body">
+              <p>Copyright (C) <span id="current-year">2013</span> Enrique Delgado</p>
+              <p>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</p> 
+              <p>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</p>
+              <p>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p>
+            </div>
+            <div class="modal-footer">
+              <a href="#" class="btn" data-dismiss="modal">Close</a>
+            </div>
           </div>
         </div>
       </div>
@@ -59,6 +81,8 @@
     <script type="text/javascript">
       // Popover after copying
       $("#copy_URL").popover({trigger: 'manual', placement: 'top', content: 'Copied!'});
+      // Adjust (c) year
+      $("#current-year").html(new Date().getFullYear());
       // Allow copying generated URL
       ZeroClipboard.setDefaults( { moviePath: 'other/ZeroClipboard.swf' } );
       var clip = new ZeroClipboard($("#copy_URL"));
@@ -67,7 +91,7 @@
         $("#copy_URL").popover('show');
         setTimeout(function(){
           $("#copy_URL").popover('hide');
-        }, 2000);
+        }, 1000);
       });
     </script>
   </body>
