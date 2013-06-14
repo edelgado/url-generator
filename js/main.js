@@ -24,13 +24,30 @@ $('#query-strings').click(function(e){
     e.preventDefault();
   }
 });
+// Where the magic happens
+$('#build-url').click(function(){
+  var a = $('div.controls').map(function(){
+    var tmp = {}; 
+    tmp[$('input[name=k]', this).val()] = $('input[name=v]', this).val(); 
+    return tmp;
+  });
+  r = {};
+  for (var i = 0; i < a.length; i++){ 
+    for(x in a[i]){ 
+      r[x] = a[i][x]; 
+    }
+  }
+  var queryStrings = http_build_query (r);
+  $('pre#generated-URL').html($('input[name=baseURL]').val() + '?' + queryStrings);
+});
+
 addParam();
 
 function addParam(){
     $('#query-strings').append(
     '<div class="controls controls-row">' + 
-    '  <input class="span3" type="text" placeholder="key">' +
-    '  <input class="span4" type="text" placeholder="value">' + 
+    '  <input class="span3" type="text" name="k" placeholder="key">' +
+    '  <input class="span4" type="text" name="v" placeholder="value">' + 
     '  <a class="span1 btn remove-param" href="#"><i class="icon-remove remove-param"></i></a>' + 
     '</div>'
   );
@@ -73,7 +90,7 @@ function http_build_query (formdata, numeric_prefix, arg_separator) {
         }
         return tmp.join(arg_separator);
       } else if (typeof val !== "function") {
-        return that.urlencode(key) + "=" + that.urlencode(val);
+        return that.encodeURIComponent(key) + "=" + that.encodeURIComponent(val);
       } else {
         throw new Error('There was an error processing for http_build_query().');
       }
