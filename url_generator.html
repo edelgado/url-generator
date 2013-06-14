@@ -51,6 +51,9 @@
       clip.on('complete', function(client, args) {
         // Trigger popover
         $("#copy_URL").popover('show');
+        setTimeout(function(){
+          $("#copy_URL").popover('hide');
+        }, 2000);
       });
 		</script>
 	</body>
