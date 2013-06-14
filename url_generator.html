@@ -3,7 +3,6 @@
   <head>
     <title>URL Generator</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
   </head>
   <body>
@@ -17,11 +16,19 @@
             <fieldset>
               <legend>Website URL</legend>
               <input id="baseUrl" type="url" name="baseURL" class="input-xlarge" placeholder="http://www.example.com/page.html">
+            </fieldset>
+          </form>
+          <form>
+            <fieldset>
               <legend>Query String Parameters</legend>
-              <div class="controls controls-row">
-                <input class="span3" type="text" placeholder="key">
-                <input class="span4" type="text" placeholder="value">
-                <a class="span1 btn" href="#"><i class="icon-remove"></i></a>
+              <div id="query-strings">
+<!--
+                <div class="controls controls-row">
+                  <input class="span3" type="text" placeholder="key">
+                  <input class="span4" type="text" placeholder="value">
+                  <a class="span1 btn remove-param" href="#"><i class="icon-remove remove-param"></i></a>
+                </div>
+-->
               </div>
             </fieldset>
           </form>
@@ -29,7 +36,7 @@
       </div>
       <div class="row">
         <div class="span12">
-          <p><a class="btn" href=""><i class="icon-plus"></i> Add</a></p>
+          <p><a class="btn" href="#" id="add-param"><i class="icon-plus"></i> Add</a></p>
         </div>
       </div>
       <div class="row">
@@ -76,23 +83,8 @@
       </div>
     </div>
     <script src="js/jquery-1.10.1.min.js"></script>
-    <script src="js/ZeroClipboard.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
-    <script type="text/javascript">
-      // Popover after copying
-      $("#copy_URL").popover({trigger: 'manual', placement: 'top', content: 'Copied!'});
-      // Adjust (c) year
-      $("#current-year").html(new Date().getFullYear());
-      // Allow copying generated URL
-      ZeroClipboard.setDefaults( { moviePath: 'other/ZeroClipboard.swf' } );
-      var clip = new ZeroClipboard($("#copy_URL"));
-      clip.on('complete', function(client, args) {
-        // Trigger popover
-        $("#copy_URL").popover('show');
-        setTimeout(function(){
-          $("#copy_URL").popover('hide');
-        }, 1000);
-      });
-    </script>
+    <script src="js/ZeroClipboard.min.js"></script>
+    <script src="js/main.js"></script>
   </body>
 </html>
